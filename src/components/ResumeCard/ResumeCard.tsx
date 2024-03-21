@@ -1,22 +1,25 @@
-import { StyleSheet, View, Image } from "react-native";
+import { StyleSheet, View, Image, Pressable } from "react-native";
 import { Text } from "../Text";
 
 interface ResumeCardProps {
   image: string;
   title: string;
+  onPress: (id?: number) => void;
 }
 
-const ResumeCard = ({ image, title }: ResumeCardProps) => {
+const ResumeCard = ({ image, title, onPress }: ResumeCardProps) => {
   return (
-    <View style={styles.container}>
-      <Text size={20}>{title.charAt(0).toUpperCase() + title.slice(1)}</Text>
+    <Pressable style={styles.container} onPress={() => onPress()}>
+      <Text size={14} weight="700">
+        {title.charAt(0).toUpperCase() + title.slice(1)}
+      </Text>
       <Image
         source={{
           uri: image,
         }}
         style={styles.image}
       />
-    </View>
+    </Pressable>
   );
 };
 
@@ -24,10 +27,13 @@ export default ResumeCard;
 
 const styles = StyleSheet.create({
   container: {
-    padding: 16,
+    padding: 8,
+    margin: 16,
     borderRadius: 16,
     gap: 16,
     alignItems: "center",
+    borderWidth: 1,
+    borderColor: "gray",
   },
   image: {
     width: 100,

@@ -1,7 +1,7 @@
 import { api } from "@/services";
 import { useEffect, useState } from "react";
 
-interface Product {
+export interface Product {
   id: number;
   title: string;
   price: number;
