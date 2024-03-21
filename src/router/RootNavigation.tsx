@@ -1,9 +1,8 @@
 import { StyleSheet } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { Home } from "@/screens";
+import { Cart, Home, Product } from "@/screens";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { NavigationContainer } from "@react-navigation/native";
-// import { ScreenContainer } from "react-native-screens";
 
 const RootNavigation = () => {
   const Stack = createStackNavigator();
@@ -11,10 +10,24 @@ const RootNavigation = () => {
   return (
     <NavigationContainer>
       <SafeAreaView style={styles.container}>
-        <Stack.Navigator>
+        <Stack.Navigator initialRouteName="Home">
           <Stack.Screen
             name="Home"
             component={Home}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="Product"
+            component={Cart}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="Cart"
+            component={Product}
             options={{
               headerShown: false,
             }}
