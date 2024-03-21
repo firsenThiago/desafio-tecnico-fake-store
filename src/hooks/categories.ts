@@ -1,7 +1,11 @@
 import { api } from "@/services";
 import { useEffect, useState } from "react";
 
-type Category = string;
+export type Category =
+  | "electronics"
+  | "jewelery"
+  | "men's clothing"
+  | "women's clothing";
 
 export const useCategories = () => {
   const [categories, setCategories] = useState<Category[] | undefined>();
