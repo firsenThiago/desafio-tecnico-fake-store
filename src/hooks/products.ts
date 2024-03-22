@@ -32,3 +32,20 @@ export const useProducts = () => {
 
   return { products };
 };
+
+export const useProduct = (id: number | undefined) => {
+  const [product, setProduct] = useState<Product | undefined>();
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const response = await api.get(`/products/${id}`);
+        const responseData: Product = response.data;
+        setProduct(responseData);
+      } catch (error) {
+        console.error("Erro ao buscar produtos:", error);
+      }
+    };
+    fetchProduct();
+  }, []);
+  return { product };
+};
