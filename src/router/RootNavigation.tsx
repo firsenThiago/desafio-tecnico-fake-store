@@ -4,11 +4,13 @@ import { Cart, Home, Product } from "@/screens";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { NavigationContainer } from "@react-navigation/native";
 import { CartProvider } from "@/contexts/cart";
+import Payment from "@/screens/Payment";
 
 export type RootStackParamList = {
   Home: undefined;
   Product: { id: number } | undefined;
   Cart: undefined;
+  Payment: undefined;
 };
 
 const RootNavigation = () => {
@@ -36,6 +38,13 @@ const RootNavigation = () => {
             <Stack.Screen
               name="Product"
               component={Product}
+              options={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name="Payment"
+              component={Payment}
               options={{
                 headerShown: false,
               }}

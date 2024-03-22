@@ -7,12 +7,13 @@ interface CartCardProps {
   image: string;
   title: string;
   onPressRemove: () => void;
+  price: number;
 }
 
-const CartCard = ({ image, title, onPressRemove }: CartCardProps) => {
+const CartCard = ({ image, title, price, onPressRemove }: CartCardProps) => {
   return (
     <View>
-      <View style={styles.container}>
+      <View style={styles.containerProduct}>
         <Text size={14} weight="700">
           {title}
         </Text>
@@ -22,6 +23,7 @@ const CartCard = ({ image, title, onPressRemove }: CartCardProps) => {
           }}
           style={styles.image}
         />
+        <Text>$ {price}</Text>
       </View>
       <Button title="Remover" onPress={onPressRemove} />
     </View>
@@ -31,9 +33,8 @@ const CartCard = ({ image, title, onPressRemove }: CartCardProps) => {
 export default CartCard;
 
 const styles = StyleSheet.create({
-  container: {
+  containerProduct: {
     padding: 8,
-    margin: 16,
     borderRadius: 16,
     gap: 16,
     alignItems: "center",

@@ -15,16 +15,18 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "@/router";
 
 export const Cart = () => {
-  const { cart, removeFromCart } = useCart();
+  const { cart, removeFromCart, priceTotal } = useCart();
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
   const renderItemCart: ListRenderItem<Product> = ({ item }) => (
     <CartCard
       title={item.title}
       image={item.image}
+      price={item.price}
       onPressRemove={() => removeFromCart(item.id)}
     />
   );
+  const Separator = () => <View style={{ marginTop: 32 }} />;
   return (
     <View style={styles.container}>
       {cart.length === 0 && (
@@ -36,9 +38,31 @@ export const Cart = () => {
             style={styles.image}
           />
           <Text size={40}>Empty cart</Text>
+        </View>
+      )}
+      <FlatList
+        data={cart}
+        renderItem={renderItemCart}
+        ItemSeparatorComponent={Separator}
+        ListHeaderComponent={
           <Button
             title="Voltar aos produtos"
             onPress={() => navigation.navigate("Home")}
+            customButton={{
+              alignItems: "center",
+              justifyContent: "center",
+              marginBottom: 50,
+            }}
+          />
+        }
+      />
+
+      {cart.length > 0 && (
+        <>
+          <Text size={32}>$ {priceTotal}</Text>
+          <Button
+            title="Finalizar pedido"
+            onPress={() => navigation.navigate("Payment")}
             customButton={{
               width: 300,
               height: 100,
@@ -46,9 +70,8 @@ export const Cart = () => {
               justifyContent: "center",
             }}
           />
-        </View>
+        </>
       )}
-      <FlatList data={cart} renderItem={renderItemCart} />
     </View>
   );
 };
