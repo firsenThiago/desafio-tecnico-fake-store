@@ -25,12 +25,12 @@ export const Home = () => {
           <>
             <View style={{ alignSelf: "center" }}>
               <Text size={32} style={styles.title}>
-                Categorias
+                Categories
               </Text>
             </View>
             <ResumeCard
               image={mockCategoriesPictures["all"]}
-              title={"Todas"}
+              title={"all"}
               onPress={() => handleCategoryPress("all")}
             />
           </>
@@ -75,7 +75,7 @@ export const Home = () => {
     <View style={styles.container}>
       <View>
         <Text size={32} style={styles.title}>
-          Produtos
+          Products
         </Text>
         <FlatList
           ListHeaderComponent={
