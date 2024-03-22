@@ -1,16 +1,12 @@
 import { Text } from "@/components";
 import { View, StyleSheet } from "react-native";
-import { RouteProp } from "@react-navigation/native";
+import { RouteProp, useRoute } from "@react-navigation/native";
+import { RootStackParamList } from "@/router";
 
-interface ProductRouteParams {
-  id: number;
-}
+export const Product = () => {
+  const route = useRoute<RouteProp<RootStackParamList, "Product">>();
 
-interface ProductProps {
-  route: RouteProp<{ Product: ProductRouteParams }, "Product">;
-}
-export const Product: React.FC<ProductProps> = ({ route }) => {
-  const { id } = route.params;
+  const id = route.params?.id;
 
   return (
     <View style={styles.container}>
@@ -27,4 +23,5 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
   },
 });
+
 export default Product;
