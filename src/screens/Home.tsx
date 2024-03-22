@@ -22,19 +22,20 @@ export const Home = () => {
     return (
       <>
         {index === 0 && (
-          <View style={{ alignSelf: "center" }}>
-            <Text size={32} style={styles.title}>
-              Categorias
-            </Text>
-          </View>
+          <>
+            <View style={{ alignSelf: "center" }}>
+              <Text size={32} style={styles.title}>
+                Categorias
+              </Text>
+            </View>
+            <ResumeCard
+              image={mockCategoriesPictures["all"]}
+              title={"Todas"}
+              onPress={() => handleCategoryPress("all")}
+            />
+          </>
         )}
-        {index === 0 && (
-          <ResumeCard
-            image={mockCategoriesPictures["all"]}
-            title={"Todas"}
-            onPress={() => handleCategoryPress("all")}
-          />
-        )}
+
         <ResumeCard
           image={mockCategoriesPictures[item]}
           title={item}
