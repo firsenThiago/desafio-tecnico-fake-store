@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, View, Image } from "react-native";
 import { Text } from "../Text";
 import { Button } from "../Button";
+import Counter from "../Counter/Counter";
 
 interface CartCardProps {
   image: string;
@@ -11,6 +12,18 @@ interface CartCardProps {
 }
 
 const CartCard = ({ image, title, price, onPressRemove }: CartCardProps) => {
+  const [count, setCount] = useState(0);
+
+  const handleAdd = () => {
+    setCount((prevCount) => prevCount + 1);
+  };
+
+  const handleDecrement = () => {
+    if (count > 0) {
+      setCount((prevCount) => prevCount - 1);
+    }
+  };
+
   return (
     <View>
       <View style={styles.containerProduct}>
@@ -25,6 +38,11 @@ const CartCard = ({ image, title, price, onPressRemove }: CartCardProps) => {
         />
         <Text>$ {price}</Text>
       </View>
+      <Counter
+        count={count}
+        onPressAdd={handleAdd}
+        onPressDecrement={handleDecrement}
+      />
       <Button title="Remover" onPress={onPressRemove} />
     </View>
   );

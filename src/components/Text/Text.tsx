@@ -16,7 +16,6 @@ interface CustomTextProps extends TextProps {
     | "700"
     | "800"
     | "900";
-  style?: object;
 }
 
 const CustomText = ({
@@ -29,7 +28,6 @@ const CustomText = ({
   const customStyle = {
     fontSize: size || 16,
     fontWeight: weight || "normal",
-    ...style,
   };
 
   return (
