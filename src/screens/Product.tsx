@@ -32,7 +32,7 @@ export const Product = () => {
           <Button
             title="Adicionar ao carrinho"
             onPress={() => {
-              addToCart(product);
+              addToCart({ ...product, quantity: 1 });
               navigation.navigate("Cart");
             }}
           />

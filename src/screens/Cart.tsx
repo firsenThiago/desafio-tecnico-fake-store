@@ -15,7 +15,7 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "@/router";
 
 export const Cart = () => {
-  const { cart, removeFromCart, priceTotal } = useCart();
+  const { cart, removeFromCart, priceTotal, emptyCart } = useCart();
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
   const renderItemCart: ListRenderItem<Product> = ({ item }) => (
@@ -24,6 +24,7 @@ export const Cart = () => {
       image={item.image}
       price={item.price}
       onPressRemove={() => removeFromCart(item.id)}
+      id={item.id}
     />
   );
   const Separator = () => <View style={{ marginTop: 32 }} />;
@@ -37,7 +38,6 @@ export const Cart = () => {
             }}
             style={styles.image}
           />
-          <Text size={40}>Empty cart</Text>
         </View>
       )}
       <FlatList
@@ -59,10 +59,13 @@ export const Cart = () => {
 
       {cart.length > 0 && (
         <>
-          <Text size={32}>$ {priceTotal}</Text>
+          <Text size={32}>$ {priceTotal.toFixed(2)}</Text>
           <Button
             title="Finalizar pedido"
-            onPress={() => navigation.navigate("Payment")}
+            onPress={() => {
+              emptyCart();
+              navigation.navigate("Payment");
+            }}
             customButton={{
               width: 300,
               height: 100,
