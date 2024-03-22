@@ -3,19 +3,31 @@ import { Product } from "@/hooks/products";
 
 interface CartContextType {
   cart: Product[];
-  setCart: React.Dispatch<React.SetStateAction<Product[]>>;
+  addToCart: (product: Product) => void;
+  removeFromCart: (productId: number) => void;
 }
 
 const CartContext = createContext<CartContextType>({
   cart: [],
-  setCart: () => {},
+  addToCart: () => {},
+  removeFromCart: () => {},
 });
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [cart, setCart] = useState<Product[]>([]);
 
+  const addToCart = (product: Product) => {
+    setCart((prevCart) => [...prevCart, product]);
+  };
+
+  const removeFromCart = (productId: number) => {
+    setCart((prevCart) =>
+      prevCart.filter((product) => product.id !== productId)
+    );
+  };
+
   return (
-    <CartContext.Provider value={{ cart, setCart }}>
+    <CartContext.Provider value={{ cart, addToCart, removeFromCart }}>
       {children}
     </CartContext.Provider>
   );

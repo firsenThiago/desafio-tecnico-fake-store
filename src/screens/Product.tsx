@@ -7,7 +7,7 @@ import { Text } from "@/components";
 import { Button } from "@/components/Button";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
-import { useCart } from "@/contexts/cart";
+import { useCart } from "@/contexts";
 
 export const Product = () => {
   const route = useRoute<RouteProp<RootStackParamList, "Product">>();
@@ -15,7 +15,7 @@ export const Product = () => {
 
   const id = route.params?.id;
   const { product } = useProduct(id);
-  const { setCart, cart } = useCart();
+  const { addToCart } = useCart();
 
   return (
     <View style={styles.container}>
@@ -32,7 +32,7 @@ export const Product = () => {
           <Button
             title="Adicionar ao carrinho"
             onPress={() => {
-              setCart([...cart, product]);
+              addToCart(product);
               navigation.navigate("Cart");
             }}
           />
